@@ -11,7 +11,7 @@ import os
 - file_name() call the right file to read and write the score (Utils.py)
 """""""""
 try:
-    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='akuoknkfv12', db='sys')
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='mypass123', db='sys')
     conn.autocommit(True)
     cursor = conn.cursor()
 except pymysql.err.OperationalError as e:
