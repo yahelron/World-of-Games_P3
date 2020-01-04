@@ -1,0 +1,6 @@
+version: '3'
+services:
+  flasc_server:
+    build: .
+    ports:
+     - "8777:8777"

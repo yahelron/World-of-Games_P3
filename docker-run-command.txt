@@ -1,0 +1,11 @@
+docker build -t image-name .
+docker ps - running containers/ -a /-l (last)
+docker images
+docker exec -it /bin/bash
+docker rmi -f image-to-delete
+docker rm container-to-delete
+docker-compose build
+sudo docker-compose up
+sudo docker-compose down
+sudo docker-compose -f /file-location.yml
+sudo docker-compose rm
