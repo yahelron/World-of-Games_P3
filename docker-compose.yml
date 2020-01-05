@@ -1,6 +1,12 @@
-version: '3'
+version: '3.1'
 services:
-  flasc_server:
-    build: .
-    ports:
-     - "8777:8777"
+ db:
+  image: mysql
+  command: --default-authentication-plugin=mysql_native_password
+  restart: always
+  environment:
+   MYSQL_ROOT_PASSWORD: mypass123
+ flasc1_server:
+  build: .
+  ports:
+   - "8777:8777"
