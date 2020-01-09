@@ -5,5 +5,5 @@ RUN pip install flask
 Run pip install pymysql
 #RUN pip install -r requirements.txt
 RUN chmod 644 MainScores.py
-CMD ["python", "MainScores.py"]
-EXPOSE 8777/tcp
+CMD ["python", "Main.py"]
+EXPOSE 5000/tcp
