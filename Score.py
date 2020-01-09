@@ -11,7 +11,7 @@ import os
 - file_name() call the right file to read and write the score (Utils.py)
 """""""""
 try:
-    conn = pymysql.connect(host='project3_db_1', port=3306, user='root', passwd='mypass123', db='sys')
+    conn = pymysql.connect(host='db', port=3306, user='root', passwd='yahelpass', db='sys')
     conn.autocommit(True)
     cursor = conn.cursor()
 except pymysql.err.OperationalError as e:
@@ -32,8 +32,9 @@ def add_score(difficulty):
     points = difficulty + points
     update_points(points)
     print("Congratulations, you've earned ", difficulty, " Points. now you have", points, " points.")
-    cursor.close()
-    conn.close()
+#    cursor.close()
+ #   conn.close()
+    return points
 
 
 def read_val():
@@ -48,4 +49,4 @@ def update_points(points):
 
 
 
-#add_score(1)
+#print(add_score(1))
