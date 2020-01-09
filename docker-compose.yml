@@ -30,6 +30,20 @@ services:
             interval: 30s
             timeout: 10s
             retries: 5
+
+   API:
+        build: API
+        ports:
+            - "5001:5001"
+        restart: always
+        environment:
+           WORDPRESS_DB_HOST: db:3306
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:5001"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+        
         
 volumes:
     dbdata: {}
