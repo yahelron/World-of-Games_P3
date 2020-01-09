@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - dbdata:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: yahelpass
+       MYSQL_DATABASE: players
+       MYSQL_USER: yahel
+       MYSQL_PASSWORD: yahelpass
+
+   mainapp:
+        depends_on:
+            - db
+        build: .
+        ports:
+            - "5000:5000"
+        restart: always
+        environment:
+           WORDPRESS_DB_HOST: db:3306
+           MYSQL_ROOT_PASSWORD: yahelpass
+           MYSQL_DATABASE: players
+           MYSQL_USER: yahel
+           MYSQL_PASSWORD: yahelpass
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8080"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+        
+volumes:
+    dbdata: {}
