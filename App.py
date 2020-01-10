@@ -80,7 +80,7 @@ def guessgame():
 
 def run_guess_game(level,guess1):
     url = urllib.request.urlopen(
-        "http://127.0.0.1:5001/parameters?level=%s&guess=%d" % (level,guess1))
+        "http://app:5001/parameters?level=%s&guess=%d" % (level,guess1))
     data = json.loads(url.read().decode())  # Decoding a web request
     # Parsing results
     results = data['guess']
