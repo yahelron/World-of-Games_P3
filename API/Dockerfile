@@ -7,4 +7,4 @@ Run pip install pymysql
 RUN cd /World-of-Games_P3
 RUN chmod 644 GuessGame.py
 CMD ["python", "GuessGame.py"]
-EXPOSE 5000/tcp
+EXPOSE 5001/tcp
