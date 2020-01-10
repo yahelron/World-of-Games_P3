@@ -5,6 +5,6 @@ RUN pip install flask
 Run pip install pymysql
 #RUN pip install -r requirements.txt
 RUN cd /World-of-Games_P3
-RUN chmod 644 App.py
-CMD ["python", "App.py"]
+RUN chmod 644 GuessGame.py
+CMD ["python", "GuessGame.py"]
 EXPOSE 5000/tcp
