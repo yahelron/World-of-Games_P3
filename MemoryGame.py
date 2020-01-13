@@ -49,8 +49,7 @@ def generate_sequence(difficulty):
         random_number = (random.randint(1, 101))
         random_list.append(random_number)
     print(random_list)
-    time_sleep(0.7)
-    screen_cleaner()
+    time.sleep(0.7)
     return random_list
 
 
