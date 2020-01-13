@@ -16,13 +16,13 @@ def screen_cleaner():
 # When the a game ends, user to choose if to exit or continue to play (called from load_game() )
 def end_game_decision():
     print("Press 'E' to exit or 'P' to play again ")
-    exit_or_play = 'A'
-    while exit_or_play is not 'E' or exit_or_play is not 'P':
-        exit_or_play = input("E/P ")
-        if exit_or_play == 'E':
-            sys.exit()
-        elif exit_or_play == 'P':
-            return True
+#     exit_or_play = 'A'
+#     while exit_or_play is not 'E' or exit_or_play is not 'P':
+#         exit_or_play = input("E/P ")
+#         if exit_or_play == 'E':
+#             sys.exit()
+#         elif exit_or_play == 'P':
+#             return True
 
 
 def time_sleep(sec):
