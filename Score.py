@@ -24,8 +24,8 @@ def add_score(difficulty):
         cursor.execute("CREATE DATABASE games;")
         cursor.execute('CREATE TABLE games.users_scores (name varchar(40) NOT NULL, score int NOT NULL) ')
         cursor.execute("INSERT INTO games.users_scores (name, score) VALUES ('game', 0 )")
-        # cursor.close()
-        # conn.close()
+        cursor.close()
+        conn.close()
     except Exception:
         pass
 
@@ -39,15 +39,25 @@ def add_score(difficulty):
 
 
 def read_val():
+    conn = pymysql.connect(host='db', port=3306, user='root', passwd='yahelpass', db='sys')
+    conn.autocommit(True)
+    cursor = conn.cursor()
     cursor.execute("select score from games.users_scores")
     current_points = cursor.fetchone()
 #    current_points = cursor.fetchall()
     points = int(current_points[0])
+    cursor.close()
+    conn.close()
     return points
 
 def update_points(points):
+    conn = pymysql.connect(host='db', port=3306, user='root', passwd='yahelpass', db='sys')
+    conn.autocommit(True)
+    cursor = conn.cursor()
     cursor.execute("UPDATE games.users_scores SET score  = %d  WHERE name = 'game' " % points)
+    cursor.close()
+    conn.close()
 
 
 
-#print(add_score(1))
+#print(add_score(5))
