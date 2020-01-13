@@ -33,7 +33,7 @@ def your_url():
     difficulty = request.form['level']
     if user_game == 'memory':
         difficulty = int(difficulty)
-        return redirect('http://127.0.0.1:5002/memory2?level=%d' % (difficulty))
+        return redirect('http://memory:5002/memory2?level=%d' % (difficulty))
     else:
         return redirect(url_for('guessgame', myguess=6,name=difficulty))
 
@@ -70,7 +70,7 @@ def guessgame():
 # call API/service of guess according the chosen difficulty (level).
 def run_guess_game(level,guess1):
     url = urllib.request.urlopen(
-        "http://127.0.0.1:5001/parameters?level=%s&guess=%d" % (level,guess1))
+        "http://api:5001/parameters?level=%s&guess=%d" % (level,guess1))
     data = json.loads(url.read().decode())  # Decoding a web request
     # Parsing results
     results = data['guess']
