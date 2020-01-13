@@ -18,6 +18,7 @@ except pymysql.err.OperationalError as e:
     print(e)
 
 def add_score(difficulty):
+    difficulty = int(difficulty)
     try:
         # create DB and tables
         cursor.execute("CREATE DATABASE games;")
