@@ -5,5 +5,5 @@ RUN pip install flask
 RUN pip install pymysql
 #RUN pip install -r requirements.txt
 RUN chmod 644 App.py
-CMD ["python", "App.py"]
+CMD ["python", "MemoryGame.py"]
 EXPOSE 5002/tcp
