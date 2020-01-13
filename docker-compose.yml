@@ -44,6 +44,18 @@ services:
             timeout: 10s
             retries: 5
         
-        
+    memory:
+        build: ./memory
+        ports:
+            - "5002:5002"
+        restart: always
+        environment:
+           WORDPRESS_DB_HOST: db:3306
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:5002"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+
 volumes:
     dbdata: {}
