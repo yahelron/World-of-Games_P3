@@ -44,7 +44,7 @@ services:
             timeout: 10s
             retries: 5
         
-    memory:
+   memory:
         build: ./memory
         ports:
             - "5002:5002"
