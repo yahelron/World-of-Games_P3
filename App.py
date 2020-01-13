@@ -32,10 +32,10 @@ def your_url():
     user_game = request.form.get('game')
     difficulty = request.form['level']
     if user_game == 'memory':
-        return 'memory'
+        difficulty = int(difficulty)
+        return redirect('http://127.0.0.1:5002/memory2?level=%d' % (difficulty))
     else:
         return redirect(url_for('guessgame', myguess=6,name=difficulty))
-
 
 
 @app.route('/guessgame', methods=['GET','POST'])
@@ -61,26 +61,16 @@ def guessgame():
             else:
                 return render_template('guess.html', difficulty=name, guess=myguess,result=result[1],points="No new points",win_num="The winner number was %d" % result[0])
         else:
-            return "זבל"
+            return "error"
     except TypeError:
         return render_template('guess.html', difficulty=5)
     except ValueError:
-        return render_template('guess.html', difficulty=5)
+        return render_template('guess.html', difficulty=1000)
 
-
-    # if myguess < 6:
-    #     return render_template('guess.html', difficulty=name, guess=myguess,result=run_guess_game(myguess,name))
-    #     #return jsonify(message="Sorry " + name + ", you are not old enough."), 401
-    # else:
-    #     return jsonify(message="you are not old enough!")
-
-# return render_template('guess.html', difficulty=difficulty, guess1="x=5")
-
-
-
+# call API/service of guess according the chosen difficulty (level).
 def run_guess_game(level,guess1):
     url = urllib.request.urlopen(
-        "http://api:5001/parameters?level=%s&guess=%d" % (level,guess1))
+        "http://127.0.0.1:5001/parameters?level=%s&guess=%d" % (level,guess1))
     data = json.loads(url.read().decode())  # Decoding a web request
     # Parsing results
     results = data['guess']
