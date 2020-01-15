@@ -1,1 +1,9 @@
 
+# tested with Terraform v0.11.14
+# this will install an AWS instance, docker & docker-compose.
+# docker-compose to run  this flask project & API with mysql DB.
+# how to:
+# rename this file to main.tf
+# create a key --> ssh-keygen -f deployer-key
+# copy the public key to public_key insted of the existing one.
+# connect with your private key ssh -i "deployer-key.pem" ubuntu@server-url
