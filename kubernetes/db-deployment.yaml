@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    app: wog
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: wog
+  clusterIP: None
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: db
+  labels:
+    app: db
+spec:
+  replicas: 1 #We always want more than 1 replica for HA
+  selector:
+    matchLabels:
+      app: db   
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db #1st container
+        image: mysql:5.7 #Dockerhub image
+        ports:
+        - containerPort: 3306 #Exposes the port  of the container
+        env:
+        - name: PORT #Env variable key passed to container that is read by app
+          value: "3306" # Value of the env port.
+        - name: MYSQL_DATABASE
+          value: players
+        - name: MYSQL_PASSWORD
+          value: yahelpass
+        - name: MYSQL_ROOT_PASSWORD
+          value: yahelpass
+        - name: MYSQL_USER
+          value: yahel
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: dbdata
+      restartPolicy: Always
+      volumes:
+      - name: dbdata
+        persistentVolumeClaim:
+          claimName: dbdata
+status: {}
+      # - name: api #2nd container
+      #   image: yahel777/wog-api:v1
+      #   ports:
+      #   - containerPort: 5001
+      #   env:
+      #   - name: PORT
+      #     value: "5001"
