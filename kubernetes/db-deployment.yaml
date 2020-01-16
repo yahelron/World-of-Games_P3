@@ -1,16 +1,3 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: db
-  labels:
-    app: wog
-spec:
-  ports:
-    - port: 3306
-  selector:
-    app: wog
-  clusterIP: None
----
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -28,6 +15,10 @@ spec:
         app: db
     spec:
       containers:
+      # - name: wog #1st container
+      #   image: yahel777/wog-app:v1 #Dockerhub image
+      #   ports:
+      #   - containerPort: 5000 #Exposes the port  of the container
       - name: db #1st container
         image: mysql:5.7 #Dockerhub image
         ports:
