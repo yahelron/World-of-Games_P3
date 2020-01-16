@@ -1,0 +1,23 @@
+<html>
+  <head>
+<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    <h3>Welcome to the guess game</h3>
+    <p>
+      Your game difficulty is: {{ difficulty }}
+	  Your guess is: {{ guess }}
+    </p>
+	<form action="/guessgame?myguess={{ guess }}&name={{ difficulty }}" method="post">
+  <label for="level"><h3>Enter your guess</h3></label>
+  <input type="number" name="guess_form" min="1" max="5" value="" required>
+  <br>
+  <br>
+  <input type="submit" value="start">
+</form>
+
+<h1><div id="result" tyle="color:blue">You are the {{ result }}</a></div></h1>
+<h3>since you {{ result }}, {{ points }} added to your credit!</h3>
+<h3>{{ win_num }}</h3>
+  </body>
+</html>

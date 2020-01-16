@@ -1,10 +1,17 @@
-<h1>Games</h1>
+<html>
+<head>
+<meta http-equiv="cache-control" content="no-cache" />
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
 
+<title>World Of Games</title>
+</head>
+<center>
+<h1>Games</h1>
 {% for message in get_flashed_messages() %}
 <h2>{{ message }}</h2>
 {% endfor %}
 
-<form action="your-url" method="post">
+<form class="form-style-4" action="your-url" method="post">
   <label for="level">Game Level (1-5)</label>
   <input type="number" name="level" min="1" max="5" value="" required>
   <br>
@@ -15,3 +22,16 @@
   <br>
   <input type="submit" value="start">
 </form>
+</center>
+
+<h4>
+Guess Game - guess a number and see if you chose like the computer
+<br>
+Memory Game - a sequence of numbers will appear for 1 second and you have to guess it back
+</h4>
+
+<br><br><br><br><br><br><br><br>
+{% extends "layout.html" %}
+
+      </body>
+       </html>

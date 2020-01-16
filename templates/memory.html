@@ -1,14 +1,16 @@
 <html>
   <head></head>
   <body>
-    <h3>Welcome to the Memory game</h3>
+  	<center>
+    <h1>Welcome to the Memory game</h1>
     <p>
       Your game difficulty is: {{ difficulty }}
 
 	   <br>
 	  Your guest numbers are: {{ user_list }}
     </p>
-	<form action="" method="post">
+
+	<form class="form-style-4" action="" method="post">
   <label for="level"><h3>Enter your numbers (numbers,numbers)</h3></label>
   <input type="" name="memory_form" value="" required>
   <br>
@@ -16,7 +18,8 @@
   <input type="submit" value="start">
 </form>
 
-
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% extends "layout.html" %}
+<center/>
   </body>
 </html>

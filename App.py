@@ -8,16 +8,15 @@ import time
 #from MemoryGame import generate_sequence, memorygame, memory2
 
 app = Flask(__name__)
-
 # http://127.0.0.1:5000/guessgame?myguess=19&name=myguess
-
+difficulty = 0
 @app.route('/')
 def my_form():
     return """<html>
             <head>
-                <title>Scores Game</title>
+
+             <title>World Of Games</title>
             </head>
-            <body>
             <body>
                 <h1><div id="game" style="color:red">World of Games</div></h1>
                 <h3><div id="game2" style="color:blue">Hello and welcome to the World of Games(WoG). Here you can find many cool games to play</div></h3>
@@ -40,42 +39,38 @@ def your_url():
         return redirect(url_for('memory2', level=difficulty))
         # return redirect('http://127.0.0.1:5002/memory2?level=%d' % (difficulty))
     else:
-        return redirect(url_for('guessgame', myguess=6,name=difficulty))
+        difficulty = int(difficulty)
+        return redirect(url_for('guessgame',level=difficulty))
 
 
 @app.route('/guessgame', methods=['GET','POST'])
 def guessgame():
-    try:
-        name = int(request.args.get('name'))
-        myguess = int(request.args.get('myguess'))
-        print('name=',name, "myguess=",myguess)
-        if request.method == 'POST':
-            myguess = request.values.get('guess_form')
-            myguess = int(myguess)
-            print("forom gusss is:",myguess)
- #           handle_data = '/guessgame?myguess=%s&name=%d' % (myguess,name)
-            if math.isnan(myguess):
-                myguess = 6
-        if myguess < 7:
-            result = run_guess_game(myguess, name)
-            if result[1] == "winner":
-                points=add_score(name)
-                print("your points", points)
-                points=str(points)
-                return render_template('guess.html', difficulty=name, guess=myguess,result=result[1],points=points)
-            else:
-                return render_template('guess.html', difficulty=name, guess=myguess,result=result[1],points="No new points",win_num="The winner number was %d" % result[0])
+    global difficulty
+    difficulty = request.args.get('level')
+    if request.method == 'POST':
+        user_guess = request.values.get('guess_form')
+        print(difficulty)
+        x = run_guess_game(user_guess, difficulty)
+        points = 0
+        if x[1] == "winner":
+            points = add_score(difficulty)
+            print("your points", points)
+            points = str(points)
+            return render_template('guess_win.html', difficulty=difficulty, result=x[1], points=points)
         else:
-            return "error"
-    except TypeError:
-        return render_template('guess.html', difficulty=5)
-    except ValueError:
-        return render_template('guess.html', difficulty=1000)
+            return render_template('guess_lose.html', difficulty=difficulty, result=x[0])
+
+    return render_template('guess.html', difficulty=difficulty, numbers='')
+
+
 
 # call API/service of guess according the chosen difficulty (level).
-def run_guess_game(level,guess1):
+def run_guess_game(difficulty,user_guess):
+    level = int(difficulty)
+    guess = int(user_guess)
+    print("level=", level, "guess=", guess)
     url = urllib.request.urlopen(
-        "http://api:5001/parameters?level=%s&guess=%d" % (level,guess1))
+        "http://api:5001/parameters?level=%s&guess=%d" % (level,guess))
     data = json.loads(url.read().decode())  # Decoding a web request
     # Parsing results
     results = data['guess']
@@ -83,6 +78,9 @@ def run_guess_game(level,guess1):
     computer_generated_number = data['computer_generated_number']
     return [computer_generated_number,results]
 
+@app.route('/about')
+def about():
+    return '@Yahel'
 ##########################################################
 ##########################################################
 
@@ -104,7 +102,7 @@ def memory2():
     difficulty = int(request.args.get('level'))
     output_numbers = generate_sequence(difficulty)
     numbers = output_numbers
-    myurl = """<script>setTimeout(function(){window.location.href="/memory?level=%d"},700);</script>""" % difficulty
+    myurl = """<center><script>setTimeout(function(){window.location.href="/memory?level=%d"},700);</script>""" % difficulty
     return '{} {}'.format(numbers, myurl)
 
 
