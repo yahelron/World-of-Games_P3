@@ -7,28 +7,33 @@ from selenium import webdriver
 def test_scores_service(app_url):
     driver = webdriver.Firefox(firefox_binary="C:\\Program Files\\Mozilla Firefox\\firefox.exe",executable_path='geckodriver.exe')
     driver.get(app_url)
-    x = driver.find_element_by_id("score").text[13:]
+    driver.find_element_by_name("level").send_keys("5")
+ #   input_element = driver.find_element_by_name("start")
+    driver.input_element.submit()
 
-    driver.quit()
+
+#    print(x)
+
+  #  driver.quit()
 #    print(type(x))
 #    print(len(x))
 #    print(x)
 
-    try:
-        x = int(x)
-#        print(type(x))
-        print('scores = ',x)
-        if x < 0 or x > 1000:
-            return False
-        else:
-            return True
-    except ValueError as e:
-        return False
+#     try:
+#         x = int(x)
+# #        print(type(x))
+#         print('scores = ',x)
+#         if x < 0 or x > 1000:
+#             return False
+#         else:
+#             return True
+#     except ValueError as e:
+#         return False
 
 
 # call test_scores_service with right url. true will exit correctly (exit(0) for sake of CI/CD test.
 def main():
-    status=test_scores_service('http://ec2-18-219-20-67.us-east-2.compute.amazonaws.com:8777/')
+    status=test_scores_service('http://3.124.186.74:5000/gamepicker')
     print(status)
     if status == True:
         exit(0)
