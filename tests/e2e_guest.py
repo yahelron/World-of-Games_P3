@@ -13,8 +13,12 @@ time.sleep(2)
 try:
     x=ffdriver.find_element_by_id("result").text
     print(x)
-    if x=="You are the winner!!!":
-        exit(0)
+    ffdriver.quit()
+
 except:
     print("error")
+    ffdriver.quit()
     exit(1)
+
+if x=="You are the winner!!!":
+    exit(0)
