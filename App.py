@@ -122,7 +122,7 @@ def memorygame():
             points = str(points)
             return render_template('memory_win.html', difficulty=difficulty, result=x, points=points)
         else:
-            return render_template('memory_lose.html', difficulty=difficulty, result=x)
+            return render_template('memory_lose.html', difficulty=difficulty, result=output_numbers)
 
     return render_template('memory.html', difficulty=difficulty, numbers='')
 
