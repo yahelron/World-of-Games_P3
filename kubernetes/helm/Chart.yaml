@@ -1,0 +1,4 @@
+apiVersion: v1
+description: A Helm chart to deploy wog three tier web application.
+name: wog
+version: 0.2.0

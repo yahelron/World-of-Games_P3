@@ -1,0 +1,22 @@
+# Wishlist deployment yaml
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: wog-deployment
+  labels:
+    app: wog
+spec:
+  replicas: {{ .Values.replicaCount.app }}
+  selector:
+    matchLabels:
+      app: wog   
+  template:
+    metadata:
+      labels:
+        app: wog
+    spec:
+      containers:
+      - name: wog #1st container
+        image: yahel777/wog-app:v2 #Dockerhub image
+        ports:
+        - containerPort: 5000 #Exposes the port  of the container
