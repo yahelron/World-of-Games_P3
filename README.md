@@ -1,10 +1,10 @@
 # World-of-Games_P3
 The World-of-Games -  a Learning Devops project
 
-Welcome to my learning project 
+Welcome to my learning project :)
 
 Inside you can find an app written in python, using a flask framework. 
-this project presents many DevOps technologies and can help you to understand better how to use each of them.
+This project presents many DevOps technologies and can help you to understand better how to use each of them.
 
 The WOG DevOps learning app:
 Contains of two web games:
