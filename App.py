@@ -50,9 +50,9 @@ def guessgame():
     if request.method == 'POST':
         user_guess = request.values.get('guess_form')
         print(difficulty)
-        x = run_guess_game(user_guess, difficulty)
+        x = run_guess_game(difficulty,user_guess)
         points = 0
-        if x[1] == "winner":
+        if x[1] == True:
             points = add_score(difficulty)
             print("your points", points)
             points = str(points)
@@ -66,16 +66,16 @@ def guessgame():
 
 # call API/service of guess according the chosen difficulty (level).
 def run_guess_game(difficulty,user_guess):
-    level = int(difficulty)
-    guess = int(user_guess)
-    print("level=", level, "guess=", guess)
+    difficulty = int(difficulty)
+    myguess = int(user_guess)
+    print("difficulty= ", difficulty, "myguess=", myguess)
     url = urllib.request.urlopen(
-        "http://api:5001/parameters?level=%s&guess=%d" % (level,guess))
+        "http://api:5001/parameters?difficulty=%s&myguess=%d" % (difficulty,myguess))
     data = json.loads(url.read().decode())  # Decoding a web request
     # Parsing results
-    results = data['guess']
+    results = data['result']
     # return results
-    computer_generated_number = data['computer_generated_number']
+    computer_generated_number = data['generated_number']
     return [computer_generated_number,results]
 
 @app.route('/about')
@@ -122,7 +122,7 @@ def memorygame():
             points = str(points)
             return render_template('memory_win.html', difficulty=difficulty, result=x, points=points)
         else:
-            return render_template('memory_lose.html', difficulty=difficulty, result=x)
+            return render_template('memory_lose.html', difficulty=difficulty, result=output_numbers)
 
     return render_template('memory.html', difficulty=difficulty, numbers='')
 

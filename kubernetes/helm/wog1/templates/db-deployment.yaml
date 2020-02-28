@@ -5,7 +5,7 @@ metadata:
   labels:
     app: db
 spec:
-  replicas: 1 #We always want more than 1 replica for HA
+  replicas: {{ .Values.replicaCount.db }}
   selector:
     matchLabels:
       app: db   

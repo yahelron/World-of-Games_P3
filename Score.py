@@ -1,5 +1,8 @@
 import pymysql
 import os
+import socket
+
+
 
 
 """""""""
@@ -10,6 +13,21 @@ import os
 - Each time the user is winning a game, the points he won will be added to his current amount of point saved in a file.   
 - file_name() call the right file to read and write the score (Utils.py)
 """""""""
+
+# wait to the DB to be and running.
+def isOpen(ip,port):
+   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+   try:
+      s.connect((ip, int(port)))
+      s.shutdown(2)
+      return True
+   except:
+      return False
+
+while isOpen('db',3306) == False:
+     print("wait for socket")
+
+
 try:
     conn = pymysql.connect(host='db', port=3306, user='root', passwd='yahelpass', db='sys')
     conn.autocommit(True)
@@ -18,6 +36,9 @@ except pymysql.err.OperationalError as e:
     print(e)
 
 def add_score(difficulty):
+    # wait to the DB to be and running (check the port).
+    while isOpen('db', 3306) == False:
+        print("wait for socket")
     difficulty = int(difficulty)
     try:
         # create DB and tables
@@ -57,6 +78,7 @@ def update_points(points):
     cursor.execute("UPDATE games.users_scores SET score  = %d  WHERE name = 'game' " % points)
     cursor.close()
     conn.close()
+
 
 
 
