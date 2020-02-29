@@ -10,8 +10,8 @@ import time
 
 def main(ip):
     click.echo(f"your ip is {ip}")
-    url_suffix = "gamepicker:5000"
-    url = "http://%s/%s" % (ip, url_suffix)
+    url_suffix = ":5000/gamepicker"
+    url = "http://%s%s" % (ip, url_suffix)
     ffdriver = webdriver.Firefox(firefox_binary="C:\\Program Files\\Mozilla Firefox\\firefox.exe",  executable_path='geckodriver.exe')
     ffdriver.get(url)
     ffdriver.find_element_by_name("level").send_keys("1")
