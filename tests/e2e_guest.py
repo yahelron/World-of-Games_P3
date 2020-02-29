@@ -4,10 +4,6 @@ import time
 
 ## check the guess game & the database
 #use like the following to run:  python file.py --ip http://3.84.16.226:5000/gamepicker
-ip = "192.168.1.30"
-url_suffix="gamepicker:5000"
-url = "http://%s/%s" % (ip,url_suffix)
-print(url)
 
 @click.command()
 @click.option ('--ip',prompt="enter the ip add")
