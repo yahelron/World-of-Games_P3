@@ -28,5 +28,9 @@ node {
           bat "python e2e_memory.py --ip=${serverip}"
           }
     }
-
+    stage("Delete Server") {
+        dir ("C:\\terraform\\devops-test"){
+        bat 'terraform destroy -auto-approve'
+      }
+    }
 }
